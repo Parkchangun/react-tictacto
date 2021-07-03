@@ -2,20 +2,11 @@ import React, { useState } from "react";
 import Board from "./Board";
 
 export default function Game() {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     history: [{ squares: Array(9).fill(null) }],
-  //     xIsNext: true,
-  //     stepNumber: 0,
-  //   };
-  // }
-
   const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
   const [xIsNext, setNext] = useState(true);
   const [stepNumber, setStepNumber] = useState(0);
 
-  const current = history[this.state.stepNumber];
+  const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
 
   const moves = history.map((step, move) => {
@@ -28,13 +19,16 @@ export default function Game() {
     );
   });
 
-  let status;
+  const status = () => {
+    if (winner) return `Winner: ${winner}`;
+    else return `Next Player: ${xIsNext ? "X" : "O"}`;
+  };
 
-  if (winner) {
-    status = `Winner: ${winner}`;
-  } else {
-    status = `Next Player: ${this.state.xIsNext ? "X" : "O"}`;
-  }
+  // if (winner) {
+  //   status = `Winner: ${winner}`;
+  // } else {
+  //   status = `Next Player: ${xIsNext ? "X" : "O"}`;
+  // }
 
   function handleClick(i) {
     const data = history.slice(0, stepNumber + 1);
@@ -66,7 +60,7 @@ export default function Game() {
         />
       </div>
       <div className="game-info">
-        <div>{status}</div>
+        <div>{status()}</div>
         <ul>{moves}</ul>
       </div>
     </div>

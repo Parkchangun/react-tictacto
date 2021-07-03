@@ -2,6 +2,8 @@ import React from "react";
 import Square from "./Square";
 
 export default function Board(props) {
+  console.log(props);
+
   function renderSquare(i) {
     return <Square value={props.squares[i]} onClick={() => props.onClick(i)} />;
   }
